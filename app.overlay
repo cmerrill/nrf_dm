@@ -27,18 +27,8 @@
 		/delete-property/ sw1;
 		/delete-property/ sw2;
 		/delete-property/ sw3;
-		pwm-led1 = &{/pwmleds/pwm_led1/};
-		pwm-led2 = &{/pwmleds/pwm_led2/};
-	};
-
-	pwmleds {
-		pwm_led1 {
-			pwms = <&pwm0 1 PWM_MSEC(20) PWM_POLARITY_NORMAL>;
-		};
-
-		pwm_led2 {
-			pwms = <&pwm0 2 PWM_MSEC(20) PWM_POLARITY_NORMAL>;
-		};
+		pwm-led1 = &green_pwm_led;
+		pwm-led2 = &blue_pwm_led;
 	};
 };
 
@@ -46,28 +36,6 @@
 	gpios = <&gpio1 6 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 };
 
-&pwm_led0 {
-	pwms = <&pwm0 0 PWM_MSEC(20) PWM_POLARITY_INVERTED>;
-};
-
-&led1 {
-	label = "Red RGB";
-	gpios = <&gpio0 8 GPIO_ACTIVE_LOW>;
-};
-
-&led2 {
-	label = "Green RGB";
-	gpios = <&gpio1 9 GPIO_ACTIVE_LOW>;
-};
-
-&led3 {
-	label = "Blue RGB";
-	gpios = <&gpio0 12 GPIO_ACTIVE_LOW>;
-};
-
-&led0 {
-	gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
-};
 
 &pwm0_default {
 	group1 {
@@ -85,18 +53,6 @@
 
 &acl {
 	status = "disabled";
-};
-
-&button1 {
-	gpios = <&gpio1 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-};
-
-&button2 {
-	gpios = <&gpio1 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-};
-
-&button3 {
-	gpios = <&gpio1 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 };
 
 &spi1 {
