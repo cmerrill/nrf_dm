@@ -1,0 +1,33 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"command": "${config:nrf-connect.nrfutil.home}\\nrfutil.exe",
+			"args": [
+				"pkg", "generate",
+				"--hw-version", "52",
+				"--sd-req=0x00",
+				"--application","${workspaceFolder}\\buildDongle\\merged.hex",
+				"--application-version", "1",
+				"${workspaceFolder}\\buildDongle\\app.zip"
+			],
+			"label": "nrf-connect-generate-pkg",
+			"problemMatcher": []
+		},
+		{
+			"type": "shell",
+			"command": "${config:nrf-connect.nrfutil.home}\\nrfutil.exe",
+			"args": [
+				"device", "program",
+				"--firmware", "${workspaceFolder}\\buildDongle\\app.zip",
+				"--traits", "nordicDfu"
+			],
+			"label": "nrf-connect-dfu-flash",
+			"dependsOn": [
+				"nrf-connect-generate-pkg"
+			],
+			"problemMatcher": []
+		}
+	]
+}

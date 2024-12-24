@@ -2,5 +2,12 @@
     "files.associations": {
         "pwm_led.h": "c"
     },
-    "nrf-connect.nrfutil.home": "${env:USERPROFILE}/.nrfutil"
+    "nrf-connect.nrfutil.home": "${env:USERPROFILE}/.nrfutil",
+    "nrf-connect.taskBindings": {
+        "flash": [
+            {
+                "taskName": "nrf-connect-dfu-flash"
+            },
+        ]
+    }
 }
