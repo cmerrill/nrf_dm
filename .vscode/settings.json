@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "pwm_led.h": "c"
+    },
+    "nrf-connect.nrfutil.home": "${env:USERPROFILE}/.nrfutil"
+}

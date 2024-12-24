@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2021 Nordic Semiconductor ASA
  *
- * SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
+ * SPDX-License-Iden	tifier: LicenseRef-Nordic-5-Clause
  */
 
 #include <zephyr/kernel.h>
@@ -139,7 +139,7 @@ static void ble_notification(const struct peer_entry *peer)
 static void led_notification(const struct peer_entry *peer)
 {
 	if (!peer) {
-		pwm_led_set(0);
+		pwm_led_set(0,0,0);
 		return;
 	}
 
@@ -158,9 +158,12 @@ static void led_notification(const struct peer_entry *peer)
 
 	res = (res < 0 ? 0 : res) * 10;
 	if (res > DISTANCE_MAX_LED) {
-		pwm_led_set(0);
+		pwm_led_set(0,0,0);
 	} else {
-		pwm_led_set((UINT16_MAX/DISTANCE_MAX_LED * res * (-1)) + UINT16_MAX);
+		uint16_t red_brightness = (UINT16_MAX/DISTANCE_MAX_LED * res * (-1)) + UINT16_MAX;
+		uint16_t green_brightness = 0;
+		uint16_t blue_brightness = 0;
+		pwm_led_set(red_brightness, green_brightness, blue_brightness);
 	}
 }
 

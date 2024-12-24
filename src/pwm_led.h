@@ -23,11 +23,13 @@ extern "C" {
  */
 int pwm_led_init(void);
 
-/** @brief Set the PWM level.
+/** @brief Set the RGB PWM level.
  *
- *  @param desired_lvl Level value.
+ *  @param desired_red Red Value.
+ *  @param desired_green Green Value.
+ *  @param desired_blue Blue Value.
  */
-void pwm_led_set(uint16_t desired_lvl);
+void pwm_led_set(uint16_t desired_red, uint16_t desired_green, uint16_t desired_blue);
 
 #ifdef __cplusplus
 }
