@@ -88,3 +88,23 @@
 &button3 {
 	gpios = <&gpio1 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 };
+
+&spi1 {
+	status = "disabled";
+};
+
+&spi3 {
+	status = "disabled";
+};
+
+&i2c0 {
+	status = "disabled";
+};
+
+&qspi {
+	status = "disabled";
+};
+
+&uart0 {
+	status = "disabled";
+};
