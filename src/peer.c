@@ -139,7 +139,7 @@ static void ble_notification(const struct peer_entry *peer)
 static void led_notification(const struct peer_entry *peer)
 {
 	if (!peer) {
-		pwm_led_set(0,0,0);
+		pwm_led_set_one(PWM_LED_INDEX_GREEN, 0);
 		return;
 	}
 
@@ -158,12 +158,10 @@ static void led_notification(const struct peer_entry *peer)
 
 	res = (res < 0 ? 0 : res) * 10;
 	if (res > DISTANCE_MAX_LED) {
-		pwm_led_set(0,0,0);
+		pwm_led_set_one(PWM_LED_INDEX_GREEN, 0);
 	} else {
-		uint16_t red_brightness = (UINT16_MAX/DISTANCE_MAX_LED * res * (-1)) + UINT16_MAX;
-		uint16_t green_brightness = 0;
-		uint16_t blue_brightness = 0;
-		pwm_led_set(red_brightness, green_brightness, blue_brightness);
+		uint16_t led_brightness = (UINT16_MAX/DISTANCE_MAX_LED * res * (-1)) + UINT16_MAX;
+		pwm_led_set_one(PWM_LED_INDEX_RED, 0);
 	}
 }
 

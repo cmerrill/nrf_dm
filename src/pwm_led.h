@@ -15,6 +15,12 @@
 extern "C" {
 #endif
 
+typedef enum {
+    PWM_LED_INDEX_RED,
+    PWM_LED_INDEX_GREEN,
+    PWM_LED_INDEX_BLUE
+} PwmLedIndex;
+
 /** @brief Initialize the PWM LED.
  *
  *  @param None
@@ -29,7 +35,15 @@ int pwm_led_init(void);
  *  @param desired_green Green Value.
  *  @param desired_blue Blue Value.
  */
-void pwm_led_set(uint16_t desired_red, uint16_t desired_green, uint16_t desired_blue);
+void pwm_led_set_all(uint16_t desired_red, uint16_t desired_green, uint16_t desired_blue);
+
+/** @brief Set the RGB PWM level.
+ *
+ *  @param index Index of the LED to affect
+ *  @param desired_level PWM level
+ */
+void pwm_led_set_one(PwmLedIndex index, uint16_t desired_level);
+
 
 #ifdef __cplusplus
 }

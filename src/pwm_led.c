@@ -16,6 +16,7 @@
 static const struct pwm_dt_spec led_red = PWM_DT_SPEC_GET(PWM_LED0_NODE);
 static const struct pwm_dt_spec led_green = PWM_DT_SPEC_GET(PWM_LED1_NODE);
 static const struct pwm_dt_spec led_blue = PWM_DT_SPEC_GET(PWM_LED2_NODE);
+static const struct pwm_dt_spec* led_array[] = {&led_red, &led_green, &led_blue};
 
 #define PWM_PERIOD	1024
 #define LIGHTNESS_MAX	UINT16_MAX
@@ -30,13 +31,17 @@ int pwm_led_init(void)
 	return 0;
 }
 
-void pwm_led_set(uint16_t desired_red, uint16_t desired_green, uint16_t desired_blue)
+void pwm_led_set_one(PwmLedIndex index, uint16_t desired_level)
 {
-	uint32_t scaled_red = (PWM_PERIOD * desired_red) / LIGHTNESS_MAX;
-	uint32_t scaled_green = (PWM_PERIOD * desired_green) / LIGHTNESS_MAX;
-	uint32_t scaled_blue = (PWM_PERIOD * desired_blue) / LIGHTNESS_MAX;
+	if (index < (sizeof(led_array)/sizeof(led_array[0]))) {
+		uint32_t scaled_level = (PWM_PERIOD * desired_level) / LIGHTNESS_MAX;
+		pwm_set_dt(led_array[index], PWM_USEC(PWM_PERIOD), PWM_USEC(scaled_level));
+	}
+}
 
-	pwm_set_dt(&led_red, PWM_USEC(PWM_PERIOD), PWM_USEC(scaled_red));
-	pwm_set_dt(&led_green, PWM_USEC(PWM_PERIOD), PWM_USEC(scaled_green));
-	pwm_set_dt(&led_blue, PWM_USEC(PWM_PERIOD), PWM_USEC(scaled_blue));
+void pwm_led_set_all(uint16_t desired_red, uint16_t desired_green, uint16_t desired_blue)
+{
+	pwm_led_set_one(PWM_LED_INDEX_RED, desired_red);
+	pwm_led_set_one(PWM_LED_INDEX_GREEN, desired_green);
+	pwm_led_set_one(PWM_LED_INDEX_BLUE, desired_blue);
 }
