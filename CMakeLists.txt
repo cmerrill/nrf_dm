@@ -17,4 +17,9 @@ target_sources(app PRIVATE
   )
 # NORDIC SDK APP END
 
+
+add_custom_target(force_merged_hex ALL)
+cmake_language(DEFER DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} CALL add_dependencies force_merged_hex app)
+cmake_language(DEFER DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} CALL set_target_properties force_merged_hex PROPERTIES ADDITIONAL_CLEAN_FILES "${CMAKE_BINARY_DIR}/../merged.hex")
+
 zephyr_library_include_directories(${CMAKE_CURRENT_SOURCE_DIR})
