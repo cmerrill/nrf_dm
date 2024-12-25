@@ -28,7 +28,7 @@
 
 #define RUN_STATUS_LED          DK_LED1
 #define CON_STATUS_LED          DK_LED2
-#define RUN_LED_BLINK_INTERVAL  1000
+#define RUN_LED_BLINK_INTERVAL  500
 
 #define SUPPORT_DM_CODE         0xFF55AA5A
 
@@ -319,16 +319,22 @@ static int bt_sync_init(void)
 	mfg_data.support_dm_code = sys_cpu_to_le32(SUPPORT_DM_CODE);
 	mfg_data.rng_seed = sys_cpu_to_le32(peer_rng_seed_prepare());
 
+	#if 1
 	err = adv_start();
+	printk("Started Advertising");
 	if (err) {
 		printk("Failed to start advertising (err %d)\n", err);
 		return err;
 	}
+	#endif
 
+	#if 1
 	err = scan_start();
+	printk("Started Scanning");
 	if (err) {
 		printk("Failed to start scanning (err %d)\n", err);
 	}
+	#endif
 
 	return err;
 }

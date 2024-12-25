@@ -8,9 +8,9 @@
 				"pkg", "generate",
 				"--hw-version", "52",
 				"--sd-req=0x00",
-				"--application","${workspaceFolder}\\buildDongle\\merged.hex",
+				"--application","${workspaceFolder}\\build\\merged.hex",
 				"--application-version", "1",
-				"${workspaceFolder}\\buildDongle\\app.zip"
+				"${workspaceFolder}\\build\\app.zip"
 			],
 			"label": "nrf-connect-generate-pkg",
 			"problemMatcher": []
@@ -20,7 +20,7 @@
 			"command": "${config:nrf-connect.nrfutil.home}\\nrfutil.exe",
 			"args": [
 				"device", "program",
-				"--firmware", "${workspaceFolder}\\buildDongle\\app.zip",
+				"--firmware", "${workspaceFolder}\\build\\app.zip",
 				"--traits", "nordicDfu"
 			],
 			"label": "nrf-connect-dfu-flash",
