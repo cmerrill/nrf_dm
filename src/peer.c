@@ -161,7 +161,7 @@ static void led_notification(const struct peer_entry *peer)
 		pwm_led_set_one(PWM_LED_INDEX_GREEN, 0);
 	} else {
 		uint16_t led_brightness = (UINT16_MAX/DISTANCE_MAX_LED * res * (-1)) + UINT16_MAX;
-		pwm_led_set_one(PWM_LED_INDEX_RED, 0);
+		pwm_led_set_one(PWM_LED_INDEX_RED, led_brightness);
 	}
 }
 
